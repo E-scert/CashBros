@@ -1,0 +1,28 @@
+
+1. Schema Overview
+   - Purpose of the database (stokvel savings system).
+   - List of tables: `users`, `user_account`, `user_transact`, `goal`.
+
+2. **Table Definitions**
+   - Each table with columns, data types, constraints, and relationships.
+   - Example:  
+     - `users`: PK = `user_id`, stores member info.  
+     - `user_account`: 1:1 with users, unique `account_num`.  
+     - `user_transact`: 1:N with accounts, linked to goals.  
+     - `goal`: savings target, auto‑updated totals.
+
+3. Constraints & Rules
+   - One user → one account (unique FK).  
+   - Withdrawals blocked until goal matured (trigger).  
+   - Deposits auto‑update totals (trigger).  
+
+4. Business Logic Notes
+   - Only deposits allowed until goal is matured.  
+   - Goals flip status to `matured` once target reached.  
+   - Cascade deletes ensure data integrity.
+
+5. Future ER Diagram
+   - Plan to add a diagram later to visualize relationships.
+
+---
+
