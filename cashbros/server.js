@@ -1,14 +1,13 @@
 const express = require("express");
-const app = express();
+const dotenv = require("dotenv");
 const PORT = process.env.PORT || 3000;
 
-//middleware
+dotenv.config();
+const app = express();
 app.use(express.json());
 
-//test route
-app.get("/", (req, res) => {
-  res.send("Cashbros backend is live!.");
-});
+const userRoutes = require("./routes/userRoutes");
+app.use("/api/users", userRoutes);
 
 //start server
 app.listen(PORT, () => {
