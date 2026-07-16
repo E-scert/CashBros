@@ -1,10 +1,27 @@
+const session = require("express-session");
 const express = require("express");
 const dotenv = require("dotenv");
-const PORT = process.env.PORT || 3000;
+
 
 dotenv.config();
+const PORT = process.env.LOCAL_PORT || 3000;
+
 const app = express();
 app.use(express.json());
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+
+
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
 
 const userRoutes = require("./routes/userRoutes");
 app.use("/api/users", userRoutes);
