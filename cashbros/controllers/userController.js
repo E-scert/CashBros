@@ -61,8 +61,7 @@ exports.updateUser = async (req, res) => {
 // DELETE
 exports.deleteUser = async (req, res) => {
   try {
-    const userId = parseInt(req.params._id || req.params.id, 10); // handle both id/_id
-    console.log("Deleting user_id:", userId);
+    const userId = parseInt(req.params._id , 10); 
 
     const result = await pool.query(
       'DELETE FROM users WHERE user_id = $1 RETURNING *',
