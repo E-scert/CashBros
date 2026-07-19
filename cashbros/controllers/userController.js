@@ -15,7 +15,7 @@ exports.loginUser = async (req,res)=>{
         if(!isMatch) return res.status(401).json({message: "Invalid credentials"});
 
         req.session.user = {
-          id: user.user_id,
+          user_id: user.user_id,
           name: user.name,
           surname: user.surname
         }

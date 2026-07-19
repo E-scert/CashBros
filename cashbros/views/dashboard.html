@@ -14,18 +14,101 @@
 </header>
 
 <main>
+  <!-- User Info -->
   <section id="userInfo">
     <h2>Welcome, <span id="userName"></span></h2>
   </section>
 
+  <!-- Accounts -->
   <section id="savingsInfo">
-    <h2> Your Savings</h2>
-    <p>Balance: <span id="balance"></span></p>
-    <p>Maturity Date: <span id="maturity"></span></p>
+    <h2>Your Savings Accounts</h2>
+
+    <!-- Create Account Form -->
+    <form id="createAccountForm">
+      <input type="text" id="accountNum" placeholder="Account Number" required>
+      <button type="submit">Create Account</button>
+    </form>
+
+    <!-- Accounts Table -->
+    <table id="accountsTable">
+      <thead>
+        <tr>
+          <th>Goal Name</th>
+          <th>Balance</th>
+          <th>Maturity Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="accountsBody">
+        <!-- JS will inject rows here -->
+      </tbody>
+    </table>
   </section>
+
+    <!-- Transactions Table -->
+    <table id="transactionsTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Date/Time</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="transactionsBody">
+        <!-- JS will inject rows here -->
+      </tbody>
+    </table>
+  </section>
+  <!-- Account Modal -->
+<div id="accountModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeAccountModal()">&times;</span>
+
+    <!-- Account Details -->
+    <h2 id="modalGoalName"></h2>
+    <p><strong>Account Number:</strong> <span id="modalAccountNum"></span></p>
+    <p><strong>Balance:</strong> R <span id="modalBalance"></span></p>
+    <p><strong>Goal Amount:</strong> R <span id="modalGoalAmount"></span></p>
+    <p><strong>Maturity Date:</strong> <span id="modalGoalTerm"></span></p>
+    <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+
+    <!-- Progress -->
+    <div class="progress-bar">
+      <div id="modalProgressFill" class="progress-fill"></div>
+    </div>
+    <span id="modalProgressText"></span>
+
+    <!-- Transactions -->
+    <h3>Transactions</h3>
+    <form id="createTransactionForm">
+      <input type="hidden" id="accountId" />
+      <select id="transactionType">
+        <option value="deposit">Deposit</option>
+        <option value="withdraw">Withdraw</option>
+      </select>
+      <input type="number" id="amountTransacted" placeholder="Amount" required />
+      <button type="submit">SUBMIT</button>
+     
+
+    </form>
+
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Type</th><th>Amount</th><th>Date</th></tr>
+      </thead>
+      <tbody id="modalTransactionsBody"></tbody>
+    </table>
+  </div>
+</div>
+
+
+
 </main>
 
 
-  <script src="dashboard.js"></script>
+
+<script src="dashboard.js"></script>
 </body>
 </html>

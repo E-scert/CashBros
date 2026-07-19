@@ -1,10 +1,8 @@
-const session = require("express-session");
 const express = require("express");
+const session = require("express-session");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("node:path");
-
-
 
 dotenv.config();
 const PORT = process.env.LOCAL_PORT || 3000;
@@ -15,9 +13,7 @@ app.use(cors({
   origin: "http://localhost:3000",
   credentials: true
 }));
-
 app.use(express.static(path.join(__dirname,"views")));
-
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -31,10 +27,18 @@ app.use(session({
   }
 }));
 
+// Routes
 const userRoutes = require("./routes/userRoutes");
-app.use("/api/users", userRoutes);
+const userAccountRoutes = require("./routes/userAccountRoutes");
+console.log("Loading goalRoutes...");
+const goalRoutes = require("./routes/goalRoutes");
+const transactionRoutes = require("./routes/userTransactionRoutes");
 
-//start server
+app.use("/api/users", userRoutes);
+app.use("/api/accounts", userAccountRoutes);
+app.use("/api/goals", goalRoutes);
+app.use("/api/transactions", transactionRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
