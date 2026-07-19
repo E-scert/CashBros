@@ -11,7 +11,16 @@ try {
       [account_id, transaction_type, amount_transacted]
     );
 
-    res.status(201).json({ transaction: result.rows[0] });
+    // Lookup the user_id for this account
+    const userResult = await pool.query(
+      `SELECT user_id FROM user_account WHERE account_id = $1`,
+      [account_id]
+    );
+
+    res.status(201).json({
+      transaction: result.rows[0],
+      user_id: userResult.rows[0].user_id
+    });
   } catch (error) {
     console.error("Error creating transaction:", error);
     res.status(500).json({ error: error.message });
